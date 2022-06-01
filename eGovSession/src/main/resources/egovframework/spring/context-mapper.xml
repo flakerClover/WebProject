@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!-- SqlSession setup for MyBatis Database Layer -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- DB 접속 설정 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- myBatis 기본 설정 -->
+        <property name="configLocation" value="classpath:/egovframework/sqlmap/sql-mapper-config.xml" />
+        
+        <!-- Query가 있는 XML 위치 
+        <property name="mapperLocations" value="classpath:/egovframework/sqlmap/mappers/**/*.xml" /> -->
+    </bean>
+    
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+ 
+    <!-- MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface -->
+     <bean class="egovframework.rte.psl.dataaccess.mapper.MapperConfigurer">
+        <property name="basePackage" value="egovframework" />
+    </bean>    
+</beans>
