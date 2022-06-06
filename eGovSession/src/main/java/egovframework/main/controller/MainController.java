@@ -49,7 +49,6 @@ public class MainController {
 	public String main(Model mainModel) throws Exception {
 		// DB Driver 확인
 		driverClass();
-		LOGGER.debug(" ========== Welcome to eGovWeb Page!");
-		return "main";
+		return "main/main";
 	}
 }
